@@ -20,7 +20,7 @@ const MenuManager = () => {
   const fetchMenus = async () => {
     try {
       setLoading(true);
-      const response = await fetch("http://localhost:5000/api/menu");
+      const response = await fetch("https://jimmi-backend.onrender.com/api/menu");
       const data = await response.json();
       if (data.success) {
         setMenus(data.data);
@@ -57,7 +57,7 @@ const MenuManager = () => {
     }
 
     try {
-      const response = await fetch("http://localhost:5000/api/menu", {
+      const response = await fetch("https://jimmi-backend.onrender.com/api/menu", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData)
@@ -85,7 +85,7 @@ const MenuManager = () => {
 
     try {
       const response = await fetch(
-        `http://localhost:5000/api/menu/${editingMenu.id}`,
+        `https://jimmi-backend.onrender.com/api/menu/${editingMenu.id}`,
         {
           method: "PUT",
           headers: { "Content-Type": "application/json" },
@@ -114,7 +114,7 @@ const MenuManager = () => {
     if (!window.confirm("Delete this menu item?")) return;
 
     try {
-      const response = await fetch(`http://localhost:5000/api/menu/${id}`, {
+      const response = await fetch(`https://jimmi-backend.onrender.com/api/menu/${id}`, {
         method: "DELETE"
       });
 

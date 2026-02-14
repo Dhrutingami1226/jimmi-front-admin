@@ -18,7 +18,7 @@ const AdminsList = () => {
   const fetchAdmins = async () => {
     try {
       setLoading(true);
-      const response = await fetch("http://localhost:5000/api/register/all");
+      const response = await fetch("https://jimmi-backend.onrender.com/api/register/all");
       const data = await response.json();
       if (data.success) {
         setAdmins(data.data);
@@ -53,7 +53,7 @@ const AdminsList = () => {
 
     try {
       const response = await fetch(
-        `http://localhost:5000/api/register/${editingAdmin.userId}`,
+        `https://jimmi-backend.onrender.com/api/register/${editingAdmin.userId}`,
         {
           method: "PUT",
           headers: { "Content-Type": "application/json" },
@@ -81,7 +81,7 @@ const AdminsList = () => {
 
     try {
       const response = await fetch(
-        `http://localhost:5000/api/register/${userId}`,
+        `https://jimmi-backend.onrender.com/api/register/${userId}`,
         {
           method: "DELETE"
         }

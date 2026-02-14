@@ -14,7 +14,7 @@ const FranchiseInquiries = () => {
   const fetchInquiries = async () => {
     try {
       setLoading(true);
-      const response = await fetch("http://localhost:5000/api/franchise");
+      const response = await fetch("https://jimmi-backend.onrender.com/api/franchise");
       const data = await response.json();
       if (data.franchises) {
         setInquiries(data.franchises);
@@ -30,7 +30,7 @@ const FranchiseInquiries = () => {
   const handleUpdateStatus = async (inquiryId, newStatus) => {
     try {
       const response = await fetch(
-        `http://localhost:5000/api/franchise/${inquiryId}`,
+        `https://jimmi-backend.onrender.com/api/franchise/${inquiryId}`,
         {
           method: "PUT",
           headers: { "Content-Type": "application/json" },
@@ -56,7 +56,7 @@ const FranchiseInquiries = () => {
 
     try {
       const response = await fetch(
-        `http://localhost:5000/api/franchise/${inquiryId}`,
+        `https://jimmi-backend.onrender.com/api/franchise/${inquiryId}`,
         {
           method: "DELETE"
         }

@@ -24,7 +24,7 @@ const AdminDashboard = ({ admin, onLogout }) => {
   const fetchAllStores = async () => {
     try {
       setLoading(true);
-      const response = await fetch("http://localhost:5000/api/stores");
+      const response = await fetch("https://jimmi-backend.onrender.com/api/stores");
       const data = await response.json();
       if (data.success) {
         setStores(data.data);
@@ -39,7 +39,7 @@ const AdminDashboard = ({ admin, onLogout }) => {
 
   const handleAddStore = async (storeData) => {
     try {
-      const response = await fetch("http://localhost:5000/api/stores", {
+      const response = await fetch("https://jimmi-backend.onrender.com/api/stores", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(storeData)
@@ -63,7 +63,7 @@ const AdminDashboard = ({ admin, onLogout }) => {
   const handleUpdateStore = async (storeData) => {
     try {
       const response = await fetch(
-        `http://localhost:5000/api/stores/${editingStore.id}`,
+        `https://jimmi-backend.onrender.com/api/stores/${editingStore.id}`,
         {
           method: "PUT",
           headers: { "Content-Type": "application/json" },
@@ -93,7 +93,7 @@ const AdminDashboard = ({ admin, onLogout }) => {
     if (!window.confirm("Are you sure you want to delete this store?")) return;
 
     try {
-      const response = await fetch(`http://localhost:5000/api/stores/${id}`, {
+      const response = await fetch(`https://jimmi-backend.onrender.com/api/stores/${id}`, {
         method: "DELETE"
       });
 
@@ -119,7 +119,7 @@ const AdminDashboard = ({ admin, onLogout }) => {
 
     try {
       const response = await fetch(
-        `http://localhost:5000/api/stores/search?name=${encodeURIComponent(searchTerm)}`
+        `https://jimmi-backend.onrender.com/api/stores/search?name=${encodeURIComponent(searchTerm)}`
       );
       const data = await response.json();
       if (data.success) {

@@ -18,7 +18,7 @@ const OffersManager = () => {
   const fetchOffers = async () => {
     try {
       setLoading(true);
-      const response = await fetch("http://localhost:5000/api/offers");
+      const response = await fetch("https://jimmi-backend.onrender.com/api/offers");
       const data = await response.json();
       if (data.success) {
         setOffers(data.data);
@@ -43,7 +43,7 @@ const OffersManager = () => {
     }
 
     try {
-      const response = await fetch("http://localhost:5000/api/offers", {
+      const response = await fetch("https://jimmi-backend.onrender.com/api/offers", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData)
@@ -70,7 +70,7 @@ const OffersManager = () => {
 
     try {
       const response = await fetch(
-        `http://localhost:5000/api/offers/${editingOffer.id}`,
+        `https://jimmi-backend.onrender.com/api/offers/${editingOffer.id}`,
         {
           method: "PUT",
           headers: { "Content-Type": "application/json" },
@@ -98,7 +98,7 @@ const OffersManager = () => {
     if (!window.confirm("Delete this offer?")) return;
 
     try {
-      const response = await fetch(`http://localhost:5000/api/offers/${id}`, {
+      const response = await fetch(`https://jimmi-backend.onrender.com/api/offers/${id}`, {
         method: "DELETE"
       });
 

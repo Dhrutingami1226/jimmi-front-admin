@@ -18,7 +18,7 @@ const AdminForgotPassword = ({ onForgotSuccess, onShowMessage }) => {
 
     setLoading(true);
     try {
-      const response = await fetch("http://localhost:5000/api/forgot-pass/send-code", {
+      const response = await fetch("https://jimmi-backend.onrender.com/api/forgot-pass/send-code", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email })
@@ -54,7 +54,7 @@ const AdminForgotPassword = ({ onForgotSuccess, onShowMessage }) => {
 
     setLoading(true);
     try {
-      const response = await fetch("http://localhost:5000/api/forgot-pass/resetpassword", {
+      const response = await fetch("https://jimmi-backend.onrender.com/api/forgot-pass/resetpassword", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ code, newpassword: newPassword })

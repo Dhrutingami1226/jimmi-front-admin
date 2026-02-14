@@ -20,7 +20,7 @@ const CarouselManager = () => {
   const fetchCarousels = async () => {
     try {
       setLoading(true);
-      const response = await fetch("http://localhost:5000/api/carousel");
+      const response = await fetch("https://jimmi-backend.onrender.com/api/carousel");
       const data = await response.json();
       if (data.success) {
         setCarousels(data.data);
@@ -58,7 +58,7 @@ const CarouselManager = () => {
     }
 
     try {
-      const response = await fetch("http://localhost:5000/api/carousel", {
+      const response = await fetch("https://jimmi-backend.onrender.com/api/carousel", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData)
@@ -87,7 +87,7 @@ const CarouselManager = () => {
 
     try {
       const response = await fetch(
-        `http://localhost:5000/api/carousel/${editingCarousel.id}`,
+        `https://jimmi-backend.onrender.com/api/carousel/${editingCarousel.id}`,
         {
           method: "PUT",
           headers: { "Content-Type": "application/json" },
@@ -117,7 +117,7 @@ const CarouselManager = () => {
     if (!window.confirm("Delete this carousel?")) return;
 
     try {
-      const response = await fetch(`http://localhost:5000/api/carousel/${id}`, {
+      const response = await fetch(`https://jimmi-backend.onrender.com/api/carousel/${id}`, {
         method: "DELETE"
       });
 
