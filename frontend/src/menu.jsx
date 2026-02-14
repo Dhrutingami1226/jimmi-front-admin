@@ -5,29 +5,49 @@ import "./menu.css";
 const Menu = () => {
   const [menus, setMenus] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
   const [activeIndex, setActiveIndex] = useState(0);
 
+  const API_URL = process.env.REACT_APP_API_URL; // backend URL from env variables
+
   useEffect(() => {
+    let isMounted = true; // prevent state update if component unmounts
+
     const fetchMenus = async () => {
       try {
         setLoading(true);
-        const response = await fetch("https://jimmi-backend.onrender.com/api/menu");
+        setError(null);
+        const response = await fetch(`${API_URL}/api/menu`);
+        if (!response.ok) throw new Error("Failed to fetch menu");
         const data = await response.json();
-        
-        if (data.success && data.data && data.data.length > 0) {
-          setMenus(data.data);
+
+        if (isMounted) {
+          if (data.success && data.data) {
+            setMenus(data.data);
+            // reset activeIndex if out of range
+            if (activeIndex >= data.data.length) setActiveIndex(0);
+          } else {
+            setMenus([]);
+          }
         }
-      } catch (error) {
-        console.error("Error fetching menu:", error);
+      } catch (err) {
+        console.error("Error fetching menu:", err);
+        if (isMounted) setError(err.message);
       } finally {
-        setLoading(false);
+        if (isMounted) setLoading(false);
       }
     };
 
-    fetchMenus();
-  }, []);
+    fetchMenus(); // initial fetch
 
-  // Move useMemo before any conditional returns
+    const interval = setInterval(fetchMenus, 10000); // refresh every 10s
+    return () => {
+      isMounted = false;
+      clearInterval(interval);
+    };
+  }, [API_URL, activeIndex]);
+
+  // calculate left, center, right slides
   const indices = useMemo(() => {
     if (!menus || menus.length === 0) {
       return { left: null, center: null, right: null };
@@ -37,12 +57,16 @@ const Menu = () => {
     return {
       left: menus[leftIndex],
       center: menus[activeIndex],
-      right: menus[rightIndex]
+      right: menus[rightIndex],
     };
   }, [activeIndex, menus]);
 
   if (loading) {
     return <div className="Menu"><p>Loading menu...</p></div>;
+  }
+
+  if (error) {
+    return <div className="Menu"><p>Error: {error}</p></div>;
   }
 
   if (!menus || menus.length === 0) {
@@ -72,26 +96,21 @@ const Menu = () => {
 
       <section className="triple-carousel">
         <div className="carousel-stage">
-          <div className="slide slide-left">
-            <img 
-              src={left.image} 
-              alt={left.name}
-            />
-          </div>
-
-          <div className="slide slide-center">
-            <img 
-              src={center.image} 
-              alt={center.name}
-            />
-          </div>
-
-          <div className="slide slide-right">
-            <img 
-              src={right.image} 
-              alt={right.name}
-            />
-          </div>
+          {left && (
+            <div className="slide slide-left">
+              <img src={left.image} alt={left.name} />
+            </div>
+          )}
+          {center && (
+            <div className="slide slide-center">
+              <img src={center.image} alt={center.name} />
+            </div>
+          )}
+          {right && (
+            <div className="slide slide-right">
+              <img src={right.image} alt={right.name} />
+            </div>
+          )}
         </div>
       </section>
     </>
