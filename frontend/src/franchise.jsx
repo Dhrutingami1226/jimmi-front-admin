@@ -152,7 +152,7 @@ const Franchise = () => {
     setSuccess(false);
 
     try {
-      const response = await fetch("http://localhost:5000/api/Franchise", {
+      const response = await fetch("https://jimmi-backend.onrender.com/api/Franchise", {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
