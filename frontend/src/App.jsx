@@ -10,7 +10,7 @@ import Footer from "./footer.jsx";
 
 function App() {
   return (
-    <Router>
+    <Router basename="/">
       <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
