@@ -99,4 +99,3 @@ const Menu = () => {
 };
 
 export default Menu;
-this is menu.jsx
